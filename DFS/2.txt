@@ -1,0 +1,124 @@
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <set>
+#include <queue>
+#include <time.h>
+#include <random>
+#include <windows.h>
+
+using namespace std;
+vector < vector < int >> graph;
+
+vector < vector < int >> g;
+int n, m;
+void output()
+{
+	ofstream out("input.txt");
+	n = 1280000;//rand() % 10000 + 1;
+	m = 1280000;//rand() % (n * (n - 1) / 2 + 1);
+	out << n << " " << m << endl;
+	g.resize(n + 1);
+	int a, b;
+	bool created = false;
+	for (int i = 0; i < m; i++)
+	{
+		while (!created)
+		{
+			a = rand() % (n - 1) + 1;
+			b = rand() % (n - 1) + 1;
+			created = true;
+			if (a == b)
+				created = false;
+			for (int i = 0; i < g[a].size(); i++)
+			{
+				if (g[a][i] == b)
+					created = false;
+			}
+		}
+		created = false;
+		g[a].push_back(b);
+		g[b].push_back(a);
+		out << a << " " << b << endl;
+	}
+}
+void output1()
+{
+	ofstream out("in.txt");
+	n = 1280000;//rand() % 10000 + 1;
+	out << n << " " << n << endl;
+	g.resize(n + 1);
+	for (int i = 1; i < n; i++)
+	{
+		out << i << " " << i + 1 << endl;
+		g[i].push_back(i + 1);
+		g[i + 1].push_back(i);
+	}
+	g[1].push_back(n);
+	g[n].push_back(1);
+	out << 1 << " " << n << endl;
+}
+
+
+int input()
+{
+	ifstream in("input.txt");
+	if (!in)
+	{
+		cerr << "Not opened";
+		return 0;
+	}
+	int n, m;
+	in >> n >> m;
+	graph.resize(n + 1);
+	int a, b;
+	for (int i = 0; i < m; i++)
+	{
+		in >> a >> b;
+		//cout << a << " " << b << endl;
+		graph[a].push_back(b);
+		graph[b].push_back(a);
+	}
+	return 1;
+}
+
+bool BFS(int start, int end)
+{
+	queue<int> Queue;
+	Queue.push(start);
+	set<int> Mark;
+
+	while (!Queue.empty())
+	{
+		start = Queue.front();
+		Queue.pop();
+		Mark.insert(start);
+		for (int i : graph[start])
+		{
+			if (Mark.count(i) == 0)
+				Queue.push(i);
+			if (i == end)
+				return true;
+		}
+	}
+	return false;
+}
+
+int main()
+{
+	setlocale(LC_ALL, "Russian");
+	srand(time(NULL)); // чтобы формула функции rand() принимала разные значения
+
+	output1();
+	input();
+	int start, end;
+	cin >> start >> end;
+	int start_time = clock();
+	if (BFS(start, end))
+		cout << "Маршрут есть" << endl;
+	else
+		cout << "Маршрута нет" << endl;
+	int end_time = clock();
+	int search_time = (end_time - start_time);
+	cout << search_time << endl;
+}

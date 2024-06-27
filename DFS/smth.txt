@@ -1,0 +1,46 @@
+int main()
+{
+#pragma comment(linker, "/STACK:167772166")
+	srand(time(NULL));
+	srand(time(NULL)); // чтобы формула функции rand() принимала разные значения
+	output();
+	Input();
+	cin >> st >> fn;
+	auto start_time = chrono::system_clock::now().time_since_epoch();
+	if (dfs(st, fn))
+	{
+		cout << "Exist" << endl;
+	}
+	else
+	{
+		cout << "Does not exist" << endl;
+	}
+	auto end_time = chrono::system_clock::now().time_since_epoch();
+	int search_time = chrono::duration_cast<chrono::milliseconds>(end_time - start_time).count();
+	cout << search_time << " ms";
+	return 0;
+}
+
+#include <time.h>
+#include <chrono>
+
+int st = 0, fn = 0;
+
+int main()
+{
+	setlocale(LC_ALL, "Russian");
+	srand(time(NULL)); // чтобы формула функции rand() принимала разные значения
+
+	//output1();
+	input();
+	int start, end;
+	cin >> start >> end;
+	int start_time = clock();
+	if (BFS(start, end))
+		cout << "Маршрут есть" << endl;
+	else
+		cout << "Маршрута нет" << endl;
+	int end_time = clock();
+	int search_time = (end_time - start_time);
+	cout << search_time << endl;
+}
