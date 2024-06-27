@@ -1,0 +1,25 @@
+Program ::= <DType> "main" "(" ")" "{" <ProgramStatement> <ReturnStatement> "}"
+
+ProgramStatement ::= <IDeclaration> <ProgramStatement> 
+ProgramStatement ::= <Expression> <ProgramStatement> 
+ProgramStatement ::= <Cycle> <ProgramStatement>
+ProgramStatement ::= 
+
+IDeclaration ::= <DType> [Identifier] ";" 
+IDeclaration ::= <DType> [Identifier] "=" <Expression>
+
+Expression ::= [Identifier] <RightPartExpr> ";"
+Expression ::= [Constant] <RightPartExpr> ";"
+
+RightPartExpr ::= <BOperation> <Expression>
+RightPartExpr ::=
+
+
+ReturnStatement ::= "return" <Expression> ";"
+
+
+Cycle ::= "while" "(" <Expression> ")" "{" <ProgramStatement> "}"
+
+BOperation ::= "+" | "-" | "<" | ">" | "<=" | ">="
+
+DType ::= "int"

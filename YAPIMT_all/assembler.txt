@@ -1,0 +1,48 @@
+section .data
+n dd 0
+m dd 0
+
+section .text
+global _start
+
+_start:
+push 4
+pop eax
+mov dword [n], eax
+push 0
+pop eax
+mov dword [m], eax
+
+L_0:
+push dword [n]
+push dword [m]
+pop ecx
+pop eax
+cmp eax, ecx
+jb end_of_cycle_0
+push eax
+pop eax
+push dword [n]
+push 1
+pop ecx
+pop eax
+sub eax, ecx
+push eax
+pop eax
+mov dword [n], eax
+push dword [n]
+push 2
+pop ecx
+pop eax
+sub eax, ecx
+push eax
+pop eax
+mov dword [n], eax
+jmp L_0
+
+end_of_cycle_0:
+
+; end of program
+mov eax, 1
+mov ebx, 0
+int 0x80
