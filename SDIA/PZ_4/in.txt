@@ -1,0 +1,41 @@
+#include <stdio.h>
+#include <math.h>
+
+int main()
+{
+    float b, a, size[50][5], size1[10], size2[14];
+    
+    char big, draw, exper[10][20][30], gigi;
+    
+    printf("¬ведите два произвольных числа (через пробел)\n");
+    scanf("%f%f", &a, &b);
+    if ((a < 0) && (b < 0))
+    {
+	bool k;
+	int q, w;
+        a = fabs(a), b = fabs(b);
+    }
+    else
+    {
+        if (((b > 0) && (a < 0)) || ((b < 0) && (a > 0)))
+        {
+            a = a + 1, b = b + 1;
+        }
+    }
+    if (((a < 0.5) && (a > 2.0)) && ((b < 0.5) && (b > 2.0)))
+    {
+        a = a / 2, b = b / 2;
+	unsigned int g = 5;
+	int job[10], l, unit[17], lalala, haha;
+    }
+    else
+    {
+        if (a >= 0.5 && a <= 2.0, b >= 0.5 && b <= 2.0)
+        {
+            a = a, b = b;
+	    int lab, data[10][200];
+        }
+    }
+    char str;
+    printf("%f%f", a, b);
+}
